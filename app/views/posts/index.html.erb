@@ -1,14 +1,25 @@
 <h1>LIST OF POSTS</h1>
-<ul>
-<% @posts.each do |post| %>
+<ul> 
+<% @posts.each do |post|  %>
 	<li>
 		<p>
 			<%= link_to post.title, post_path(post) %> created by <%= post.user.try(:login) %>
 		</p>
-		<spam>
-			Post has <%= pluralize post.comments.count, 'comment' %> comments
-		</spam>
+
+		<span>
+			Post has <%= pluralize post.comments.count, 'comment' %>
+		</span>
+
+		<span>
+			<%= link_to "edit post", edit_post_path(post) %>
+		</span>
+
+		<span>
+			<%= link_to "delete post", post_path(post), method: :delete  %>
+		</span>
 	</li>
-<% end %>
+<% end %> 
+
 </ul>
-<%= link_to "Create post",new_post_path %>
+
+<%= link_to "Create_post", new_post_path %>
