@@ -35,17 +35,18 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_path, notice: "Post was successflly deleted"
+    flash[:notice]="Post was succesfully deleted"
+    redirect_to posts_path
   end  
 
   private
-  def post
-    @post ||= Post.find(params[:id])
-  end
-  
-  def post_params
-    params.require(:post).permit(:title, :body)
-  end
+    def post
+      @post ||= Post.find(params[:id])
+    end
+    
+    def post_params
+      params.require(:post).permit(:title, :body)
+    end
 
   helper_method :post
 end

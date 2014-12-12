@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
 	
-	before_action :post, only: [:show, :edit, :update, :destroy]
-	before_action :authenticate_user!, only: [:show, :create]
+	before_action :post
+	before_action :authenticate_user!
 
 	def create
 		puts params
@@ -11,17 +11,18 @@ class CommentsController < ApplicationController
 			flash[:notice] = "Comment was succesfully created"
 		else
 			flash[:notice] = "Comment wasn succesfully created"	
+		end
 		redirect_to posts_path(post)
 	end 
 
 	private
-		def post
-			@post ||= Post.find( params[:post_id] )
-		end
+	def post
+		@post ||= Post.find(params[:post_id] )
+	end
 
-		def post_params
-			params.require(:comment).permit(:title,:message)		
-		end
+	def comment_params
+		params.require(:comment).permit(:title,:message)		
+	end
 		
-		helper_method :post
+	helper_method :post
 end
